@@ -1,0 +1,25 @@
+<html>
+<head>
+    <script type="text/javascript" src="mousetrap.min.js"></script>
+</head>
+    <body>
+
+    	<form>
+    	<textarea id="book">
+    		
+    	</textarea>
+    	</form>
+
+
+    <script type="text/javascript" >
+    	var form = document.querySelector('#book');
+		var mousetrap = new Mousetrap(form);
+		mousetrap.bind('mod+s', function(e){
+				alert("ctrl-s");
+				return false;
+			});
+    </script>
+
+    </body>
+
+    </html>

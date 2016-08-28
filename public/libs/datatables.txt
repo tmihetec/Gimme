@@ -1,0 +1,43 @@
+<link rel="stylesheet" type="text/css" href="DataTables-1.10.12/css/dataTables.bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="Buttons-1.2.1/css/buttons.bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="FixedHeader-3.1.2/css/fixedHeader.bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="Responsive-2.1.0/css/responsive.bootstrap.min.css"/>
+ 
+<script type="text/javascript" src="JSZip-2.5.0/jszip.min.js"></script>
+<script type="text/javascript" src="pdfmake-0.1.18/build/pdfmake.min.js"></script>
+<script type="text/javascript" src="pdfmake-0.1.18/build/vfs_fonts.js"></script>
+<script type="text/javascript" src="DataTables-1.10.12/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="DataTables-1.10.12/js/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript" src="Buttons-1.2.1/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" src="Buttons-1.2.1/js/buttons.bootstrap.min.js"></script>
+<script type="text/javascript" src="Buttons-1.2.1/js/buttons.colVis.min.js"></script>
+<script type="text/javascript" src="Buttons-1.2.1/js/buttons.flash.min.js"></script>
+<script type="text/javascript" src="Buttons-1.2.1/js/buttons.html5.min.js"></script>
+<script type="text/javascript" src="Buttons-1.2.1/js/buttons.print.min.js"></script>
+<script type="text/javascript" src="FixedHeader-3.1.2/js/dataTables.fixedHeader.min.js"></script>
+<script type="text/javascript" src="Responsive-2.1.0/js/dataTables.responsive.min.js"></script>
+<script type="text/javascript" src="Responsive-2.1.0/js/responsive.bootstrap.min.js"></script>
+
+
+libs\DataTables
+
+<link rel="stylesheet" type="text/css" href="{{asset("libs/DataTables/DataTables-1.10.12/css/dataTables.bootstrap.min.css")}}"/>
+<link rel="stylesheet" type="text/css" href="{{asset("libs/DataTables/Buttons-1.2.1/css/buttons.bootstrap.min.css")}}""/>
+<link rel="stylesheet" type="text/css" href="{{asset("libs/DataTables/FixedHeader-3.1.2/css/fixedHeader.bootstrap.min.css")}}""/>
+<link rel="stylesheet" type="text/css" href="{{asset("libs/DataTables/Responsive-2.1.0/css/responsive.bootstrap.min.css")}}""/>
+ 
+<script type="text/javascript" src="{{asset("libs/DataTables/JSZip-2.5.0/jszip.min.js")}}""></script>
+<script type="text/javascript" src="{{asset("libs/DataTables/pdfmake-0.1.18/build/pdfmake.min.js")}}""></script>
+<script type="text/javascript" src="{{asset("libs/DataTables/pdfmake-0.1.18/build/vfs_fonts.js")}}""></script>
+<script type="text/javascript" src="{{asset("libs/DataTables/DataTables-1.10.12/js/jquery.dataTables.min.js")}}""></script>
+<script type="text/javascript" src="{{asset("libs/DataTables/DataTables-1.10.12/js/dataTables.bootstrap.min.js")}}""></script>
+<script type="text/javascript" src="{{asset("libs/DataTables/Buttons-1.2.1/js/dataTables.buttons.min.js")}}""></script>
+<script type="text/javascript" src="{{asset("libs/DataTables/Buttons-1.2.1/js/buttons.bootstrap.min.js")}}""></script>
+<script type="text/javascript" src="{{asset("libs/DataTables/Buttons-1.2.1/js/buttons.colVis.min.js")}}""></script>
+<script type="text/javascript" src="{{asset("libs/DataTables/Buttons-1.2.1/js/buttons.flash.min.js")}}""></script>
+<script type="text/javascript" src="{{asset("libs/DataTables/Buttons-1.2.1/js/buttons.html5.min.js")}}""></script>
+<script type="text/javascript" src="{{asset("libs/DataTables/Buttons-1.2.1/js/buttons.print.min.js")}}""></script>
+<script type="text/javascript" src="{{asset("libs/DataTables/FixedHeader-3.1.2/js/dataTables.fixedHeader.min.js")}}""></script>
+<script type="text/javascript" src="{{asset("libs/DataTables/Responsive-2.1.0/js/dataTables.responsive.min.js")}}""></script>
+<script type="text/javascript" src="{{asset("libs/DataTables/Responsive-2.1.0/js/responsive.bootstrap.min.js")}}""></script>
+

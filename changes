@@ -1,0 +1,149 @@
+// AKO AFFILIATE NIJE ACTIVE, NEMRE dodat realizaciju
+// (add2score - middleware)
+
+// kod logina - ako nije affiliate, onda samo na info stranicu koja mu veli da kontaktira admina (mail)
+
+
+// item list -> scores vodi na tablicu sa svim realizacijama za taj item
+// item list -> bulk actions (delete, (de)activate)
+
+
+
+
+// TODO za V1
+
+	// add items (csv) 
+
+	// oni rezultati na PARTNERS / POS
+
+	// možda? admin, push message (flag "seen by user" koji se postavlja na "dismiss (x)")
+
+	// u tablicu user/partner/pos dodati i ukupni qty
+
+	// ADMiN ITEM LIST: u  edit i create item, između points i active dodati "SALES ACTION NAME" (i "STARTDATE") - i to spremati u bazu kod promjene bodova!
+
+
+############
+############
+############
+############
+kod unosa artikla obavezno dodati STARTDATE i SALESACTION (ako ima bodova!)
+############
+############
+############
+############
+
+
+
+
+
+///
+!! PRAVILO!!
+znači, napraviti UPLOAD slike kroz profil. - ako nema slike, opomena!, pregled tih slika, bananje slike, opet, ako nema, upozorenje!
+[14:32:45] tmihetec: hoćemo im staviti fotke,
+[14:33:24] tmihetec: tipa, kad se logiraju onda stoji cijeli dan svima fotka onog ko je to jutro imao najbolji kvartalni rez :D
+[14:33:35] tmihetec: malo da briju :)
+///
+
+
+///
+kod spremanja datuma... nemože se spremiti realizacija u budućnosti!! (provjeriti ono sa short date format)
+///
+
+
+///
+///
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+##_import:
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+	xls tablica mora imati: sku, pn, naziv, nc, kategoriju, brand, bodovi, tempid
+
+	1)prvo import u temp tablicu sve
+		- promijeniti sve u tekst, staviti da je NC "." umjesto ",", points =ROUND( xx;0)
+
+
+			#sql0 (opcija) - SVE (ili neke) STARE STAVITI NA 0 bodova!
+				INSERT INTO itempoints
+					(item_id, points, startdate, salesaction_id, user_id, created_at)
+				SELECT
+					id, 0, '2016-08-05', 3, 1, '2016-08-05'
+				FROM items
+				[opcija:	WHERE id < 104 ]
+
+
+
+			#sql-1 - NOVI ITEMI
+					--- v1 ( 53 rows inserted. Inserted row id: 156 (Query took 0.0800 seconds.)):
+						INSERT INTO items 
+							(name, active, sku, pn, category_id, brand_id, nc)
+						    
+						SELECT 
+							name, 1 as active, sku, pn, category_id, brand_id, nc
+						FROM 
+			                itemstemporary
+			            
+			            WHERE sku NOT IN 
+			            	(
+			                 SELECT sku FROM items 
+			                )
+
+			        --- v2 (53 rows inserted. Inserted row id: 156 (Query took 0.1000 seconds.)):
+			        	INSERT INTO items
+							(name, active, sku, pn, category_id, brand_id, nc)
+						SELECT 
+							name, 1 as active, sku, pn, category_id, brand_id, nc
+						FROM 
+							itemstemporary
+						LEFT OUTER JOIN (SELECT DISTINCT sku as tempsku FROM items) s 
+							ON itemstemporary.sku = s.tempsku
+						WHERE s.tempsku IS NULL
+
+
+			        --- v3 ( 53 rows inserted. Inserted row id: 156 (Query took 0.0700 seconds.)):
+			        	INSERT INTO items
+							(name, active, sku, pn, category_id, brand_id, nc)
+						SELECT 
+							name, 1 as active, sku, pn, category_id, brand_id, nc
+						FROM 
+							itemstemporary
+						WHERE NOT EXISTS (
+							SELECT 1 FROM items WHERE sku = itemstemporary.sku
+						)
+
+
+			###
+			INSERT INTO `salesactions` (`id`, `name`, `startdate`, `enddate`, `description`) VALUES (NULL, 'zopo-tab', '2016-08-05', NULL, NULL);
+			###
+
+			#sql2 - ubaci u povijest, i sales akciju (pridružena/odabrana kod importa)
+
+				INSERT INTO itempoints
+					(item_id, points, startdate, salesaction_id, user_id, created_at)
+				SELECT
+					items.id, itemstemporary.points, '2016-08-05', 3, 1, '2016-08-05'
+				FROM itemstemporary 
+				LEFT JOIN items ON itemstemporary.sku = items.sku
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+30) gimme: push vijesti svima, tablica sa user, procitao_vijest_id = flag koji se stavi na 1 ako dismissa.
+vijest mu se ne pojavljuje ako nije "AKTIVNA" i ako je dismisao. 
+Admin vidi tko je sve "zatvorio" (=pročitao) i tko nije.
+ima tablicu "obavijesti".
+obavijest: 
+	- svima, POSu, korisniku
+	- text - čisti
+	- attachment? (link na dl) - generira se html sa DL linkovima 
+	- tip (danger, info)
+
+
+
+
+----
+V2 maknuti ITEM ID, staviti da je SKU index!!
+V2 - dodati i qtyw/m/q/c u tablice - user, pos, partner
